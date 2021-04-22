@@ -12,8 +12,10 @@ public class TEAMSProcessor {
     private String _fileName;
     private String _startTime;
     private String _endTime;
+	private String _cours;
+	private String _date;
 
-    public TEAMSProcessor(File _file, String _start, String _stop) {
+    public TEAMSProcessor(File _file, String _intitule, String _date, String _start, String _stop) {
         /*
          csv file to read
          start time of the course
@@ -21,6 +23,8 @@ public class TEAMSProcessor {
         */
         this._startTime = _start;
         this._endTime = _stop;
+        this._date = _date;
+        this._cours = _intitule;
 
         // load CSV file
         this._fileName = _file.getName();
@@ -46,7 +50,7 @@ public class TEAMSProcessor {
     }
 
     public String toHTMLCode() {
-
+    	_cours = "CM Bases de données et programmation Web";
         String html = "<!DOCTYPE html> \n <html lang=\"fr\"> \n <head> \n <meta charset=\"utf-8\"> ";
         html += "<title> Attendance Report </title> \n <link rel=\"stylesheet\" media=\"all\" href=\"visu.css\"> \n";
         html += "</head> \n <body> \n ";
@@ -56,7 +60,7 @@ public class TEAMSProcessor {
                 "<table>\n" +
                 "\t<tr>\n" +
                 "\t\t<th> Date : </th>\n" +
-                "\t\t<td> " + /*this._allpeople.iterator().next().getDate() +*/ " </td>\n" +
+                "\t\t<td> " + this._date + " </td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<th> Heure début : </th>\n" +
@@ -68,7 +72,7 @@ public class TEAMSProcessor {
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<th> Cours : </th>\n" +
-                "\t\t<td> CM Bases de données et programmation Web </td>\n" +
+                "\t\t<td> "+this._cours+" </td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<th> Fichier analysé : </th>\n" +

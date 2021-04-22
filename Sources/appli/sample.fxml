@@ -1,10 +1,19 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="appli.MainController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-    <Button text="Fichier..." onAction="#sayHelloWorld"/>
-    <Label GridPane.rowIndex="1" fx:id="HelloWorld" />
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" onDragDropped="#handleDragDrop" onDragOver="#handleDragOver" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="appli.MainController">
+    <Button onAction="#sayHelloWorld" text="Fichier..." />
+    <Label fx:id="HelloWorld" GridPane.rowIndex="1" />
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
