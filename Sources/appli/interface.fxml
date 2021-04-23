@@ -18,9 +18,9 @@
    <children>
       <VBox layoutX="19.0" layoutY="11.0" prefHeight="424.0" prefWidth="289.0">
          <children>
-            <AnchorPane onDragDropped="#handleDragDrop" onDragOver="#handleDragOver" onMouseClicked="#sayHelloWorld" prefHeight="72.0" prefWidth="198.0" style="-fx-border-color: grey; -fx-border-width: 1;">
+            <AnchorPane focusTraversable="true" onDragDropped="#handleDragDrop" onDragOver="#handleDragOver" onMouseClicked="#fileChoose" opacity="0.5" prefHeight="72.0" prefWidth="198.0" style="-fx-border-color: grey; -fx-border-width: 1;">
                <children>
-                  <Label layoutX="81.0" layoutY="28.0" text="Déposez votre fichier ici" />
+                  <Label fx:id="uploadLabel" layoutX="35.0" layoutY="28.0" text="Choisissez un fichier ou faites le glisser ici" textAlignment="CENTER" />
                </children>
             </AnchorPane>
             <GridPane>
@@ -36,13 +36,13 @@
               </rowConstraints>
                <children>
                   <Label text="Fichier :" />
-                  <Label fx:id="fileName" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="fileName" text="---" GridPane.columnIndex="1" />
                   <Label text="Date :" GridPane.rowIndex="1" />
-                  <Label fx:id="date" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="date" text="---" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Heure min :" GridPane.rowIndex="2" />
-                  <Label fx:id="minTime" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="minTime" text="---" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Heure max :" GridPane.rowIndex="3" />
-                  <Label fx:id="maxTime" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="maxTime" text="---" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <Separator prefWidth="200.0" />
@@ -91,7 +91,7 @@
                </children>
             </HBox>
             <Separator prefWidth="200.0" />
-            <Button contentDisplay="CENTER" mnemonicParsing="false" text="Générer la sortie" textAlignment="CENTER" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#validation" text="Générer la sortie" textAlignment="CENTER" />
          </children>
       </VBox>
    </children>

@@ -31,6 +31,7 @@ public class MainController {
     public Label date;
     public Label minTime;
     public Label maxTime;
+    public Label uploadLabel;
     
     public ToggleGroup sortGroup;
     public RadioButton idSort;
@@ -41,15 +42,19 @@ public class MainController {
     public TextField startCourseField;
     public TextField endCourseField;
 
+    File selectedFile = null;
+    
     public void validation(ActionEvent actionEvent) throws FileNotFoundException {
-
-
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showOpenDialog(null);
-
-        // process the file, and limit periods to given time interval
-    	genHTML(selectedFile, "CM Bases de données", "19/01/2021", "19/01/2021 à 10:15:00", "19/01/2021 à 11:45:00");
-
+       if(selectedFile!=null) {
+    	   
+    	   if (!(intituleField.getText().isEmpty()
+    			   ||startCourseField.getText().isEmpty()
+    			   ||endCourseField.getText().isEmpty())) {
+    	    	//genHTML(selectedFile, "CM Bases de données", "19/01/2021", "19/01/2021 à 10:15:00", "19/01/2021 à 11:45:00");
+    		   genHTML(selectedFile, intituleField.getText(), "19/01/2021", startCourseField.getText(), endCourseField.getText());
+		}else
+			System.err.println("Manque d'information");
+       }
         
     }
     @FXML
@@ -64,9 +69,18 @@ public class MainController {
     private void handleDragDrop(DragEvent event) throws FileNotFoundException {
 		// TODO Auto-generated method stub
     	System.out.println("Dropped");
-    	File selectedFile = event.getDragboard().getFiles().get(0);
-    	genHTML(selectedFile, "CM Bases de données", "19/01/2021", "19/01/2021 à 10:15:00", "19/01/2021 à 11:45:00");
+    	selectedFile = event.getDragboard().getFiles().get(0);
+    	fileName.setText(selectedFile.getName());
+    	//uploadLabel.setText("Fichier importé");
+    	
 	}
+    @FXML
+    private void fileChoose(ActionEvent actionEvent) {
+		// TODO Auto-generated method stub
+    	FileChooser fileChooser = new FileChooser();
+    	selectedFile = fileChooser.showOpenDialog(null);
+	}
+    
     
     
     void genHTML(File file, String intitule, String date, String debut, String fin) throws FileNotFoundException {

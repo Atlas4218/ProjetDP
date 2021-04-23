@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <GridPane alignment="center" hgap="10" onDragDropped="#handleDragDrop" onDragOver="#handleDragOver" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="appli.MainController">
-    <Button onAction="#sayHelloWorld" text="Fichier..." />
+    <Button onAction="#fileChoose" text="Fichier..." />
     <Label fx:id="HelloWorld" GridPane.rowIndex="1" />
    <columnConstraints>
       <ColumnConstraints />
