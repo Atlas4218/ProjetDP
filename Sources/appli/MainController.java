@@ -2,9 +2,14 @@ package appli;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -15,10 +20,28 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class MainController {
-    public Label HelloWorld;
 
-    public void sayHelloWorld(ActionEvent actionEvent) throws FileNotFoundException {
+public class MainController {
+	public CheckBox withoutId;
+	public CheckBox withoutName;
+	public CheckBox withoutPlanning;
+	
+    public Label HelloWorld;
+    public Label fileName;
+    public Label date;
+    public Label minTime;
+    public Label maxTime;
+    
+    public ToggleGroup sortGroup;
+    public RadioButton idSort;
+    public RadioButton nameSort;
+    public RadioButton timeSort; 
+    
+    public TextField intituleField;
+    public TextField startCourseField;
+    public TextField endCourseField;
+
+    public void validation(ActionEvent actionEvent) throws FileNotFoundException {
 
 
         FileChooser fileChooser = new FileChooser();
