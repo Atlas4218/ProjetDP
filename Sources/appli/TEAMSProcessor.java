@@ -49,7 +49,7 @@ public class TEAMSProcessor {
         return _allpeople;
     }
 
-    public String toHTMLCode() {
+    public String toHTMLCode(boolean name, boolean id, boolean planning) {
     	_cours = "CM Bases de données et programmation Web";
         String html = "<!DOCTYPE html> \n <html lang=\"fr\"> \n <head> \n <meta charset=\"utf-8\"> ";
         html += "<title> Attendance Report </title> \n <link rel=\"stylesheet\" media=\"all\" href=\"visu.css\"> \n";
@@ -93,7 +93,7 @@ public class TEAMSProcessor {
 
         for (People people : this._allpeople) {
 
-            html += people.getHTMLCode();
+            html += people.getHTMLCode(name, id, planning);
         }
 
 	    html += "</div> \n </body> \n </html>";

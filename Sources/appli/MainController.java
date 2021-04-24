@@ -53,10 +53,12 @@ public class MainController {
     			   ||startCourseField.getText().isEmpty()
     			   ||endCourseField.getText().isEmpty())) {
     	    	//genHTML(selectedFile, "CM Bases de données", "19/01/2021", "19/01/2021 à 10:15:00", "19/01/2021 à 11:45:00");
-    		   genHTML(selectedFile, intituleField.getText(), "19/01/2021", startCourseField.getText(), endCourseField.getText());
+    		   genHTML(selectedFile, intituleField.getText(), date.getText(), date.getText()+" à "+startCourseField.getText(), date.getText()+" à "+endCourseField.getText());
 		}else
 			System.err.println("Manque d'information");
        }
+       else
+    	   System.err.println("Aucun Fichier");
         
     }
     @FXML
@@ -70,35 +72,35 @@ public class MainController {
 		// TODO Auto-generated method stub
     	System.out.println("Dropped");
     	selectedFile = event.getDragboard().getFiles().get(0);
-    	fileName.setText(selectedFile.getName());
-    	List<String> times = new ArrayList<String>();
+    	//extractions des données du fichier
+    	fileName.setText(selectedFile.getName()); //nom du fichier
     	
+    	//listes des evenements
+    	List<String> times = new ArrayList<String>();
     	var teamsFile = new TEAMSAttendanceList(selectedFile);
         var lines = teamsFile.get_attlist();
         if (lines != null) {
             Iterator<String> element = lines.iterator();
-            // first line unused
+            // Première ligne
             element.next();
             
             while (element.hasNext()) {
                 String input = element.next();
-
                 String[] infos = input.split("\t");
-                
                 if (infos.length==3) {
-                    String instant = infos[2];
+                    String instant = infos[2]; //Date et Heure de l'evenement
                     times.add(instant);
                 }
             }
         }
+        
         Collections.sort(times);
-        date.setText(times.get(0).split(" à ")[0]);
-        minTime.setText(times.get(0).split(" à ")[1]);
-    	maxTime.setText(times.get(times.size()-1).split(" à ")[1]);
+        date.setText(times.get(0).split(" à ")[0]); //Dates
+        minTime.setText(times.get(0).split(" à ")[1]); //Heure début
+    	maxTime.setText(times.get(times.size()-1).split(" à ")[1]); //Heure fin
     	
     	
-    	
-    	/*intituleField.setText(selectedFile.getName().split(".")[0]); //autocompletion de l'intitulé
+    	/*intituleField.setText(selectedFile.getName().split(".")[0]); 
     	uploadLabel.setText("Fichier importé");*/
     	
 	}
@@ -113,6 +115,9 @@ public class MainController {
     
     void genHTML(File file, String intitule, String date, String debut, String fin) throws FileNotFoundException {
     	
+    	boolean name = !withoutName.isSelected();
+    	boolean id = !withoutId.isSelected();
+    	boolean planning = !withoutPlanning.isSelected();
     	var teamsProcessor = new TEAMSProcessor(file, intitule, date, debut, fin);
     	
     	/*
@@ -122,9 +127,9 @@ public class MainController {
         }
 */
         PrintWriter printWriter = new PrintWriter("result.html");
-        printWriter.print(teamsProcessor.toHTMLCode());
+        printWriter.print(teamsProcessor.toHTMLCode(name, id, planning));
         printWriter.close();
-        System.out.println( teamsProcessor.toHTMLCode() );
+        System.out.println( teamsProcessor.toHTMLCode(name, id, planning));
     }
     
 }

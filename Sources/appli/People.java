@@ -93,7 +93,7 @@ public class People implements Comparable<People> {
         return this._name;
     }
 
-    public String getHTMLCode() {
+    public String getHTMLCode(boolean name, boolean id, boolean planning) {
 
         if ( this.isOutOfPeriod() ) return ("");
 
@@ -105,8 +105,12 @@ public class People implements Comparable<People> {
 
         String html="";
 		html += "<div class=\"datapeople\"> \n";
-		html += "<div class=\"name\"> " + this.getName() + " </div> \n";
-		html +=	"<div class=\"timebar\">";
+		if(name)
+			html += "<div class=\"name\"> " + this.getName() + " </div> \n";
+		if(id)
+			html += "<div class=\"id\"> " + this.get_id() + " </div> \n";
+		if(planning)
+			html +=	"<div class=\"timebar\">";
 
         double totalDuration = 0;
         LocalDateTime refTime = TEAMSDateTimeConverter.StringToLocalDateTime(this._start);
@@ -119,30 +123,34 @@ public class People implements Comparable<People> {
             // begin > reftime : white bar
             Duration delay = Duration.between(refTime, begin);
             double delayMinutes = Math.abs(delay.toSeconds()/60.);
-            if (delayMinutes>0.0) {
+            if (delayMinutes>0.0&&planning) {
                 html += "<img src=\"off.png\" ";
                 html += "width=\"" + (100.*delayMinutes/durationMaxMinutes) + "%\" ";
                 html += "height=\"20\" title=\"absent(e) de " + refTime.toString();
                 html += " à " + begin.toString() + " \"> \n";
             }
             // green bar for the current period
-            html += "<img src=\"on.png\" ";
-            html += "width=\"" + (100.*duration/durationMaxMinutes) + "%\" ";
-            html += "height=\"20\" title=\"connecté(e) de " + begin.toString();
-            html += " à " + end.toString()+ "\"> \n";
-            refTime = end;
+            if (planning) {
+				html += "<img src=\"on.png\" ";
+	            html += "width=\"" + (100.*duration/durationMaxMinutes) + "%\" ";
+	            html += "height=\"20\" title=\"connecté(e) de " + begin.toString();
+	            html += " à " + end.toString()+ "\"> \n";
+	            refTime = end;
+			}
+            
         }
         // last period aligned on end time ?
         //LocalDateTime endTime = TEAMSDateTimeConverter.StringToLocalDateTime(this._stop);
         Duration delay = Duration.between(refTime, endTime);
         double delayMinutes = Math.abs(delay.toSeconds()/60.);
-        if (delayMinutes>0.0) {
+        if (delayMinutes>0.0&&planning) {
             html += "<img src=\"off.png\" ";
             html += "width=\"" + (100.*delayMinutes/durationMaxMinutes) + "%\" ";
             html += "height=\"20\" title=\"absent(e) de " + refTime.toString();
             html += " à " + endTime.toString() + " \"> \n";
         }
-		html += "</div> \n"; // end of div timebar
+        if(planning)
+        	html += "</div> \n"; // end of div timebar
         html +=	"<div class=\"duration\"> " + (long)Math.round(totalDuration) + " </div> \n";
         html +=	"<div class=\"percentd\"> " + (long)Math.round(100.*totalDuration/durationMaxMinutes) + "% </div> \n";
         html += "</div>\n"; // end of div datapeople

@@ -57,9 +57,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="intituleField" prefHeight="25.0" prefWidth="262.0" GridPane.columnIndex="1" />
-                  <TextField fx:id="startCourseField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="endCourseField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="intituleField" prefHeight="25.0" prefWidth="262.0" text="CM Base de données" GridPane.columnIndex="1" />
+                  <TextField fx:id="startCourseField" promptText="HH:mm:ss" text="10:15:00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="endCourseField" promptText="HH:mm:ss" text="11:45:00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Intitulé du cours :" />
                   <Label text="Heure de début :" GridPane.rowIndex="1" />
                   <Label text="Heure de fin :" GridPane.rowIndex="2" />
