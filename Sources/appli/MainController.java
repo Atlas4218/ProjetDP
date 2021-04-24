@@ -10,16 +10,17 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class MainController {
@@ -61,10 +62,8 @@ public class MainController {
     @FXML
     void handleDragOver(DragEvent event){
     	System.out.println("Draged over");
-    	if (event.getDragboard().hasFiles()) {
-        	event.acceptTransferModes(TransferMode.ANY);
-
-		}
+    	if (event.getDragboard().hasFiles()) 
+			event.acceptTransferModes(TransferMode.ANY);
     }
     @FXML
     private void handleDragDrop(DragEvent event) throws FileNotFoundException {
@@ -72,7 +71,35 @@ public class MainController {
     	System.out.println("Dropped");
     	selectedFile = event.getDragboard().getFiles().get(0);
     	fileName.setText(selectedFile.getName());
-    	//uploadLabel.setText("Fichier importé");
+    	List<String> times = new ArrayList<String>();
+    	
+    	var teamsFile = new TEAMSAttendanceList(selectedFile);
+        var lines = teamsFile.get_attlist();
+        if (lines != null) {
+            Iterator<String> element = lines.iterator();
+            // first line unused
+            element.next();
+            
+            while (element.hasNext()) {
+                String input = element.next();
+
+                String[] infos = input.split("\t");
+                
+                if (infos.length==3) {
+                    String instant = infos[2];
+                    times.add(instant);
+                }
+            }
+        }
+        Collections.sort(times);
+        date.setText(times.get(0).split(" à ")[0]);
+        minTime.setText(times.get(0).split(" à ")[1]);
+    	maxTime.setText(times.get(times.size()-1).split(" à ")[1]);
+    	
+    	
+    	
+    	/*intituleField.setText(selectedFile.getName().split(".")[0]); //autocompletion de l'intitulé
+    	uploadLabel.setText("Fichier importé");*/
     	
 	}
     @FXML
