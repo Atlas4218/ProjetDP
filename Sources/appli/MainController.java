@@ -8,6 +8,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -75,7 +76,7 @@ public class MainController {
     	
 	}
     @FXML
-    private void fileChoose(ActionEvent actionEvent) {
+    private void fileChoose(MouseEvent mouseEvent) {
 		// TODO Auto-generated method stub
     	FileChooser fileChooser = new FileChooser();
     	selectedFile = fileChooser.showOpenDialog(null);
