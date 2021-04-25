@@ -42,8 +42,13 @@ public class TEAMSAttendanceListAnalyzer {
         }
     }
 
-    public HashMap<String, People> get_peopleList() {
-        return _peopleList;
+    public HashMap<String, People> get_peopleList(String comparator) {
+        
+    	 for (People people : _peopleList.values()) {
+    		 people.setComparator(comparator);
+    	 }
+    	
+    	return _peopleList;
     }
 
     public void setStartAndStop(String start, String stop) {

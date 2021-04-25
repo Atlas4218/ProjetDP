@@ -127,7 +127,14 @@ public class MainController {
     	boolean name = !withoutName.isSelected();
     	boolean id = !withoutId.isSelected();
     	boolean planning = !withoutPlanning.isSelected();
-    	var teamsProcessor = new TEAMSProcessor(file, intitule, date, debut, fin);
+    	String comparator = "time";
+
+    	if (idSort.isSelected()) 
+			comparator = "id";
+		if (nameSort.isSelected())
+			comparator = "name";
+    	
+    	var teamsProcessor = new TEAMSProcessor(file, intitule, date, debut, fin, comparator);
     	
     	/*
         var allpeople = teamsProcessor.get_allpeople();
@@ -145,6 +152,8 @@ public class MainController {
         	printWriter.print(teamsProcessor.toHTMLCode(name, id, planning));
         	printWriter.close();
         }
+    	
+    	
         //System.out.println( teamsProcessor.toHTMLCode(name, id, planning));
     }
     

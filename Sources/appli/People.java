@@ -13,6 +13,7 @@ public class People implements Comparable<People> {
     private String _start;
     private String _stop;
     private LinkedList<TEAMSPeriod> _periodList;
+    private String comparator;
 
     public People(String _name) {
         this._name = _name;
@@ -24,7 +25,11 @@ public class People implements Comparable<People> {
         return _id;
     }
 
-    public void addPeriod(String action, String instant) {
+    public void setComparator(String comparator) {
+		this.comparator = comparator;
+	}
+
+	public void addPeriod(String action, String instant) {
 
         if ( action.charAt(0) == 'R' ) {
             TEAMSPeriod period = new TEAMSPeriod(instant);
@@ -175,7 +180,11 @@ public class People implements Comparable<People> {
 
     @Override
     public int compareTo(People o) {
-        return (int)(this.getTotalAttendanceDuration()-o.getTotalAttendanceDuration());
+    	switch(comparator) {
+    	case "name": return (int)(this.getName().compareTo(o.getName()));
+    	case "id":  return (int)(this.get_id().compareTo(o.get_id()));
+    	}
+    	return (int)(this.getTotalAttendanceDuration()-o.getTotalAttendanceDuration());
     }
 
     public boolean isOutOfPeriod() {

@@ -70,7 +70,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox disable="true" prefHeight="100.0" prefWidth="365.0">
+                        <VBox prefHeight="100.0" prefWidth="365.0">
                            <children>
                               <Label text="Trier la sortie" />
                               <RadioButton fx:id="timeSort" mnemonicParsing="false" selected="true" text="par présence">

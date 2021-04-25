@@ -15,7 +15,7 @@ public class TEAMSProcessor {
 	private String _cours;
 	private String _date;
 
-    public TEAMSProcessor(File _file, String _intitule, String _date, String _start, String _stop) {
+    public TEAMSProcessor(File _file, String _intitule, String _date, String _start, String _stop, String comparator) {
         /*
          csv file to read
          start time of the course
@@ -38,10 +38,10 @@ public class TEAMSProcessor {
             // cut periods before start time and after end time
             filter.setStartAndStop(_start, _stop);
             // sort
-            List<People> peopleByDuration = new ArrayList<>(filter.get_peopleList().values());
-            //Collections.sort(peopleByDuration);
+            List<People> people= new ArrayList<>(filter.get_peopleList(comparator).values());
+            Collections.sort(people);
             // init the people collection
-            this._allpeople = peopleByDuration;//filter.get_peopleList().values();
+            this._allpeople = people;//filter.get_peopleList().values();
         }
     }
 
