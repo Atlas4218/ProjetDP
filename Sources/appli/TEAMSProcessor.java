@@ -39,7 +39,7 @@ public class TEAMSProcessor {
             filter.setStartAndStop(_start, _stop);
             // sort
             List<People> peopleByDuration = new ArrayList<>(filter.get_peopleList().values());
-            Collections.sort(peopleByDuration);
+            //Collections.sort(peopleByDuration);
             // init the people collection
             this._allpeople = peopleByDuration;//filter.get_peopleList().values();
         }
@@ -50,7 +50,6 @@ public class TEAMSProcessor {
     }
 
     public String toHTMLCode(boolean name, boolean id, boolean planning) {
-    	_cours = "CM Bases de données et programmation Web";
         String html = "<!DOCTYPE html> \n <html lang=\"fr\"> \n <head> \n <meta charset=\"utf-8\"> ";
         html += "<title> Attendance Report </title> \n <link rel=\"stylesheet\" media=\"all\" href=\"visu.css\"> \n";
         html += "</head> \n <body> \n ";
@@ -64,11 +63,11 @@ public class TEAMSProcessor {
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<th> Heure début : </th>\n" +
-                "\t\t<td> " + this._startTime + " </td>\n" +
+                "\t\t<td> " + this._startTime.split(" à ")[1] + " </td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<th> Heure fin : </th>\n" +
-                "\t\t<td> " + this._endTime + " </td>\n" +
+                "\t\t<td> " + this._endTime.split(" à ")[1] + " </td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<th> Cours : </th>\n" +
